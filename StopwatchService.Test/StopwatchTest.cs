@@ -19,6 +19,8 @@ namespace StopwatchService.Test
         [Test]
         public void Create_New_Stopwatch_With_Status_Started()
         {
+            Stopwatch newStopwatch = new Stopwatch("Olympio's Stopwatch", "olympio");
+
             //Assert
             Assert.AreEqual(StopwatchStatus.Started, stopwatch.Status,
                 "Stopwatch without Status Started.");
