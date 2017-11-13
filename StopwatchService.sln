@@ -14,6 +14,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{540110
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StopwatchService.Test", "StopwatchService.Test\StopwatchService.Test.csproj", "{93ACDD6C-A74B-49A3-8E9F-A02AF887C711}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StopwatchService.BusinessRules", "StopwatchService.BusinessRules\StopwatchService.BusinessRules.csproj", "{73B28FDA-65F6-49D5-A251-970EE68FE9A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StopwatchService.DataAccess", "StopwatchService.DataAccess\StopwatchService.DataAccess.csproj", "{260C191D-6643-4DE7-9078-482ACEB70B34}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +32,14 @@ Global
 		{93ACDD6C-A74B-49A3-8E9F-A02AF887C711}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93ACDD6C-A74B-49A3-8E9F-A02AF887C711}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93ACDD6C-A74B-49A3-8E9F-A02AF887C711}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73B28FDA-65F6-49D5-A251-970EE68FE9A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73B28FDA-65F6-49D5-A251-970EE68FE9A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73B28FDA-65F6-49D5-A251-970EE68FE9A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73B28FDA-65F6-49D5-A251-970EE68FE9A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{260C191D-6643-4DE7-9078-482ACEB70B34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{260C191D-6643-4DE7-9078-482ACEB70B34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{260C191D-6643-4DE7-9078-482ACEB70B34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{260C191D-6643-4DE7-9078-482ACEB70B34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

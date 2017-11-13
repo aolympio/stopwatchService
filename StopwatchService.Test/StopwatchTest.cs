@@ -19,6 +19,8 @@ namespace StopwatchService.Test
         [Test]
         public void Create_New_Stopwatch_With_Status_Started()
         {
+            //TODO: Bater no banco para verificar se existe
+            //Se Sim,  reseta, senão cria.
             Stopwatch newStopwatch = new Stopwatch("Olympio's Stopwatch", "olympio");
 
             //Assert
@@ -34,6 +36,8 @@ namespace StopwatchService.Test
         public void Reset_Existent_Stopwatch()
         {
             //Act
+            //TODO: Bater no banco para verificar se existe
+            //Se Sim,  reseta, senão cria.
             stopwatch.Reset();
 
             //Assert
