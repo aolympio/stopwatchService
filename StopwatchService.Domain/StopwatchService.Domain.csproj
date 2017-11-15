@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{73B28FDA-65F6-49D5-A251-970EE68FE9A1}</ProjectGuid>
+    <ProjectGuid>{EFC5D170-173B-4DCE-B1C3-D3BCB457BDFA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StopwatchService.BusinessRules</RootNamespace>
-    <AssemblyName>StopwatchService.BusinessRules</AssemblyName>
+    <RootNamespace>StopwatchService.Domain</RootNamespace>
+    <AssemblyName>StopwatchService.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,14 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StopwatchBusiness.cs" />
+    <Compile Include="Entities\Stopwatch.cs" />
+    <Compile Include="Entities\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Domain\StopwatchService.Domain.csproj">
-      <Project>{efc5d170-173b-4dce-b1c3-d3bcb457bdfa}</Project>
-      <Name>StopwatchService.Domain</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

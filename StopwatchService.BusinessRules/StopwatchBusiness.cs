@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StopwatchService.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,23 +9,21 @@ namespace StopwatchService.BusinessRules
 {
     public class StopwatchBusiness
     {
-         private void Create(string name, string owner)
+        private void Create(string name, string owner)
         {
-            this.Name = name;
-            this.Owner = owner;
-            this.CreationDate = DateTime.Now;
-            EditStopwatchBehavior(this.CreationDate, Enums.StopwatchStatus.Started);
+            User currentUser = new User { Name = owner };
+            Stopwatch newStowatch = new Stopwatch
+            {
+                Owner = owner,
+                Name = name,
+                CreationDate = DateTime.Now
+            };
         }
 
-        public void Reset()
+        public void Reset(Stopwatch stopwatch)
         {
-            EditStopwatchBehavior(DateTime.Now, Enums.StopwatchStatus.Reseted);
+            stopwatch.ResetingDate = DateTime.Now;
         }
 
-        private void EditStopwatchBehavior(DateTime setDate, 
-            Enums.StopwatchStatus status)
-        {
-            this.InitializeDate = setDate;
-        }
     }
 }
