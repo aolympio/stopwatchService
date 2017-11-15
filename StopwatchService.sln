@@ -18,7 +18,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StopwatchService.BusinessRu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StopwatchService.DataAccess", "StopwatchService.DataAccess\StopwatchService.DataAccess.csproj", "{260C191D-6643-4DE7-9078-482ACEB70B34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StopwatchService.Domain", "Domain\StopwatchService.Domain.csproj", "{EFC5D170-173B-4DCE-B1C3-D3BCB457BDFA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StopwatchService.Domain", "StopwatchService.Domain\StopwatchService.Domain.csproj", "{EFC5D170-173B-4DCE-B1C3-D3BCB457BDFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

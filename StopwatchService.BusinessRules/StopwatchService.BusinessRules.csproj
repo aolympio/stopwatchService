@@ -43,7 +43,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Domain\StopwatchService.Domain.csproj">
+    <ProjectReference Include="..\StopwatchService.Domain\StopwatchService.Domain.csproj">
       <Project>{efc5d170-173b-4dce-b1c3-d3bcb457bdfa}</Project>
       <Name>StopwatchService.Domain</Name>
     </ProjectReference>
