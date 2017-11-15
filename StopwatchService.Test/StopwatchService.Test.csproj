@@ -49,14 +49,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StopwatchService\StopwatchService.csproj">
-      <Project>{8b64629e-a3b6-45d4-bbd1-096eadfd19cb}</Project>
-      <Name>StopwatchService</Name>
+    <ProjectReference Include="..\StopwatchService.Domain\StopwatchService.Domain.csproj">
+      <Project>{efc5d170-173b-4dce-b1c3-d3bcb457bdfa}</Project>
+      <Name>StopwatchService.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
