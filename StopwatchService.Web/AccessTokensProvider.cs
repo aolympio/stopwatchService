@@ -33,5 +33,15 @@ namespace StopwatchService.Web
             var userIdentity = new ClaimsIdentity(context.Options.AuthenticationType);
             context.Validated(userIdentity);
         }
+
+        public override Task TokenEndpoint(OAuthTokenEndpointContext context)
+        {
+            // Passing token properties
+            foreach (var item in context.Properties.Dictionary)
+            {
+                context.AdditionalResponseParameters.Add(item.Key, item.Value);
+            }
+            return base.TokenEndpoint(context);
+        }
     }
 }
