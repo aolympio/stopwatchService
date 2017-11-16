@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StopwatchService.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -7,6 +8,7 @@ using System.Web.Http;
 
 namespace StopwatchService.Controllers
 {
+    [Authorize]
     public class StopwatchController : ApiController
     {        
         /// <summary>
@@ -24,9 +26,24 @@ namespace StopwatchService.Controllers
         /// GET: api/stopwatch
         /// </summary>
         /// <returns>List of stopwatches containing its name and elapsed time.</returns>
-        public IEnumerable<string> Get()
+        [HttpGet]
+        public IList<Stopwatch> Get()
         {
-            return new string[] { "Stopwatch1", "02:05" };
+            return new List<Stopwatch> {new Stopwatch()
+            {
+                ID = 1,
+                Name = "Cron1",
+                Owner = "Olympio",
+                CreationDate = DateTime.Now,
+                ResetingDate = DateTime.Now
+            }, new Stopwatch()
+            {
+                ID = 2,
+                Name = "Cron2",
+                Owner = "Olympio",
+                CreationDate = DateTime.Now,
+                ResetingDate = DateTime.Now
+            }};
         }
 
         /// <summary>
