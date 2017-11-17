@@ -41,8 +41,13 @@
   <ItemGroup>
     <Compile Include="StopwatchBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StopwatchDataAccess.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\StopwatchService.DataAccess\StopwatchService.DataAccess.csproj">
+      <Project>{260c191d-6643-4de7-9078-482aceb70b34}</Project>
+      <Name>StopwatchService.DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StopwatchService.Domain\StopwatchService.Domain.csproj">
       <Project>{efc5d170-173b-4dce-b1c3-d3bcb457bdfa}</Project>
       <Name>StopwatchService.Domain</Name>

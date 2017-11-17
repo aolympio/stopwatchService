@@ -1,4 +1,5 @@
-﻿using StopwatchService.Domain.Entities;
+﻿using StopwatchService.DataAccess;
+using StopwatchService.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,5 +26,17 @@ namespace StopwatchService.BusinessRules
             stopwatch.ResetingDate = DateTime.Now;
         }
 
+
+        public ICollection<Stopwatch> GetStopwatchesByOwner(string ownerToken)
+        {
+            var stopwatchDataAccess = new StopwatchDataAccess();
+            return stopwatchDataAccess.GetStopwatchesByOwner(ownerToken);
+        }
+
+        public ICollection<Stopwatch> GetStopwatchesByName(string name, string ownerToken)
+        {
+            var stopwatchDataAccess = new StopwatchDataAccess();
+            return stopwatchDataAccess.GetStopwatchesByName(name, ownerToken);
+        }
     }
 }

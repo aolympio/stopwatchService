@@ -1,4 +1,5 @@
-﻿using StopwatchService.Domain.Entities;
+﻿using StopwatchService.BusinessRules;
+using StopwatchService.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Web.Http;
 namespace StopwatchService.Controllers
 {
     [Authorize]
+    [RoutePrefix("api")]
     public class StopwatchController : ApiController
     {        
         /// <summary>
@@ -16,6 +18,8 @@ namespace StopwatchService.Controllers
         /// POST: api/stopwatch
         /// </summary>
         /// <param name="name">Stopwatch name to be created/reset.</param>
+        [HttpPost]
+        [Route("stopwatch/{name}")]
         public void Post([FromBody]string name)
         {
 
@@ -26,24 +30,17 @@ namespace StopwatchService.Controllers
         /// GET: api/stopwatch
         /// </summary>
         /// <returns>List of stopwatches containing its name and elapsed time.</returns>
-        [HttpGet]
-        public IList<Stopwatch> Get()
+        [Route("stopwatch")]
+        public HttpResponseMessage Get()
         {
-            return new List<Stopwatch> {new Stopwatch()
-            {
-                ID = 1,
-                Name = "Cron1",
-                Owner = "Olympio",
-                CreationDate = DateTime.Now,
-                ResetingDate = DateTime.Now
-            }, new Stopwatch()
-            {
-                ID = 2,
-                Name = "Cron2",
-                Owner = "Olympio",
-                CreationDate = DateTime.Now,
-                ResetingDate = DateTime.Now
-            }};
+            var currentOwnerToken = Request.Headers.Authorization.Parameter;
+
+            var stopwatchBusiness = new StopwatchBusiness();
+
+            ICollection<Stopwatch> stopwatchesFromCurrentOwner = 
+                stopwatchBusiness.GetStopwatchesByOwner(currentOwnerToken);            
+
+            return Request.CreateResponse(HttpStatusCode.OK, stopwatchesFromCurrentOwner);
         }
 
         /// <summary>
@@ -52,9 +49,17 @@ namespace StopwatchService.Controllers
         /// </summary>
         /// <param name="name">Stopwatch desired name.</param>
         /// <returns>List of stopwatches containing its name and elapsed time.</returns>
-        public IEnumerable<string> Get(string name)
+        [Route("stopwatch/{name}")]
+        public HttpResponseMessage Get(string name)
         {
-            return new string[] { "Stopwatch1", "02:05" };
+            var currentOwnerToken = Request.Headers.Authorization.Parameter;
+
+            var stopwatchBusiness = new StopwatchBusiness();
+
+            ICollection<Stopwatch> namedStopwatchesFromCurrentOwner =
+                stopwatchBusiness.GetStopwatchesByName(name, currentOwnerToken);
+
+            return Request.CreateResponse(HttpStatusCode.OK, namedStopwatchesFromCurrentOwner);
         }
 
                
