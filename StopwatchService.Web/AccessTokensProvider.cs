@@ -1,4 +1,5 @@
 ﻿using Microsoft.Owin.Security.OAuth;
+using StopwatchService.BusinessRules;
 using StopwatchService.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -18,12 +19,10 @@ namespace StopwatchService.Web
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            var usuario = BaseUsers
-                .Users()
-                .FirstOrDefault(x => x.Name == context.UserName && x.Password == context.Password);
-
+            var isRegissteredUser = new UserBusiness().ValidateIfUserIsRegistered(context.UserName, context.Password);
+            
             //Canceling token creation if user is not found.
-            if (usuario == null)
+            if (!isRegissteredUser)
             {
                 context.SetError("invalid_grant", "User Not Found.");
                 return;

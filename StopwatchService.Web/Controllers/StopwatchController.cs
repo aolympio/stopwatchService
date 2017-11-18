@@ -19,10 +19,16 @@ namespace StopwatchService.Controllers
         /// </summary>
         /// <param name="name">Stopwatch name to be created/reset.</param>
         [HttpPost]
-        [Route("stopwatch/{name}")]
-        public void Post([FromBody]string name)
+        [Route("stopwatch")]
+        public HttpResponseMessage Post([FromBody]string name)
         {
+            var currentOwnerToken = Request.Headers.Authorization.Parameter;
 
+            var stopwatchBusiness = new StopwatchBusiness();
+
+            var stopwatchInProgress = stopwatchBusiness.InsertOrReplaceStopwatch(name, currentOwnerToken);
+
+            return Request.CreateResponse(HttpStatusCode.Created, stopwatchInProgress);
         }
 
         /// <summary>
@@ -37,7 +43,7 @@ namespace StopwatchService.Controllers
 
             var stopwatchBusiness = new StopwatchBusiness();
 
-            ICollection<Stopwatch> stopwatchesFromCurrentOwner = 
+            ICollection<ResponseStopwatchWrapper> stopwatchesFromCurrentOwner = 
                 stopwatchBusiness.GetStopwatchesByOwner(currentOwnerToken);            
 
             return Request.CreateResponse(HttpStatusCode.OK, stopwatchesFromCurrentOwner);

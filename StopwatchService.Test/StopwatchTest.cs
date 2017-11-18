@@ -26,7 +26,7 @@ namespace StopwatchService.Test
             //TODO: Confirm it was reseted
             Assert.AreNotEqual(DateTime.MinValue, stopwatch.CreationDate,
                 "Stopwatch not created.");
-            Assert.AreNotEqual(DateTime.MinValue, stopwatch.ResetingDate,
+            Assert.AreNotEqual(DateTime.MinValue, stopwatch.LastActionDate,
                 "Stopwatch not initialized.");
         }
 

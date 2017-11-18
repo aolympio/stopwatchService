@@ -21,7 +21,8 @@ namespace StopwatchService.Web
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-            // Enabling Cors
+            // Enabling Cors+		config	{System.Web.Http.HttpConfiguration}	System.Web.Http.HttpConfiguration
+
             app.UseCors(CorsOptions.AllowAll);
 
             // Enable Access Tokens

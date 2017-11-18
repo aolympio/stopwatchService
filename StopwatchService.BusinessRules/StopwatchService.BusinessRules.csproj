@@ -39,9 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UserBusiness.cs" />
     <Compile Include="StopwatchBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StopwatchDataAccess.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StopwatchService.DataAccess\StopwatchService.DataAccess.csproj">
@@ -52,6 +52,9 @@
       <Project>{efc5d170-173b-4dce-b1c3-d3bcb457bdfa}</Project>
       <Name>StopwatchService.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
