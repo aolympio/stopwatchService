@@ -68,7 +68,6 @@
   <ItemGroup>
     <Compile Include="BaseDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ConfigurationKeyProvider.cs" />
     <Compile Include="UserDataAccess.cs" />
     <Compile Include="StopwatchDataAccess.cs" />
   </ItemGroup>
@@ -80,6 +79,10 @@
     <ProjectReference Include="..\StopwatchService.Domain\StopwatchService.Domain.csproj">
       <Project>{efc5d170-173b-4dce-b1c3-d3bcb457bdfa}</Project>
       <Name>StopwatchService.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StopwatchService.Infrastructure\StopwatchService.Infrastructure.csproj">
+      <Project>{4c1d0368-b2fa-421d-befc-d2bf8ff2e260}</Project>
+      <Name>StopwatchService.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

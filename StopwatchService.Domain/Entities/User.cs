@@ -9,13 +9,11 @@ namespace StopwatchService.Domain.Entities
 
         public User(string name, string token)
         {
-            this.Name = this.RowKey;
-            this.Token = this.PartitionKey;
+            this.PartitionKey = token;
+            this.RowKey = name;
         }
 
-        public string Name { get; set; }
         public string Password { get; set; }
-        public string Token { get; set; }
         public DateTime TokenExpirationDate { get; set; }
         public bool IsEnabled { get; set; }
         public DateTime CreationDate { get; set; }

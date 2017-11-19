@@ -23,33 +23,12 @@ namespace StopwatchService.BusinessRules
         public ICollection<ResponseStopwatchWrapper> GetStopwatchesByOwner(string ownerToken)
         {
             var responseStopwatches = new List<ResponseStopwatchWrapper>();
-            var stopwatches =  StopwatchDataAccess.GetStopwatchesByOwner(ownerToken);
-
-            foreach (var currentStopwatch in stopwatches)
-            {
-                responseStopwatches.Add(
-                    new ResponseStopwatchWrapper(
-                        currentStopwatch.Name, this.GetElapsedTime(currentStopwatch.LastActionDate)));
-            }
-
-            return responseStopwatches;
+            return StopwatchDataAccess.GetStopwatchesByOwner(ownerToken);
         }
 
         public ICollection<Stopwatch> GetStopwatchesByName(string name, string ownerToken)
         {
             return StopwatchDataAccess.GetStopwatchesByName(name, ownerToken);
         }
-
-        /// <summary>
-        /// Get Elapsed time in Seconds among Last Action Date versus current date time.
-        /// </summary>
-        /// <param name="lastActionDate">Last Action Date (May be creation or reset date).</param>
-        /// <returns>Elapsed Time in Seconds.</returns>
-        private int GetElapsedTime(DateTime lastActionDate)
-        {
-            TimeSpan elapsedTime = DateTime.Now - lastActionDate;
-            return (int)elapsedTime.TotalSeconds;
-        }
-
     }
 }

@@ -135,6 +135,10 @@
       <Project>{efc5d170-173b-4dce-b1c3-d3bcb457bdfa}</Project>
       <Name>StopwatchService.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StopwatchService.Infrastructure\StopwatchService.Infrastructure.csproj">
+      <Project>{4c1d0368-b2fa-421d-befc-d2bf8ff2e260}</Project>
+      <Name>StopwatchService.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,4 +1,6 @@
 ﻿using StopwatchService.DataAccess;
+using StopwatchService.Domain.Entities;
+using StopwatchService.Domain.Structs;
 
 namespace StopwatchService.BusinessRules
 {
@@ -16,5 +18,14 @@ namespace StopwatchService.BusinessRules
         {
             return userDataAccess.ValidateIfUserIsRegistered(name, password);
         }
+
+        public User InsertOrReplaceStopwatch(UserWrapper userWrapper)
+        {
+            User user =
+                userDataAccess.InsertOrReplaceStopwatch(userWrapper);
+
+            return user;
+        }
+
     }
 }

@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2005
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D1E39485-378B-4A42-90E8-F5C687B1BB17}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{540110A7-60F4-447C-B050-F441CB0755D2}"
@@ -19,6 +21,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StopwatchService.Domain", "StopwatchService.Domain\StopwatchService.Domain.csproj", "{EFC5D170-173B-4DCE-B1C3-D3BCB457BDFA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StopwatchService.Web", "StopwatchService.Web\StopwatchService.Web.csproj", "{8C3E9548-1A70-4073-B16B-F3DA8733946A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StopwatchService.Infrastructure", "StopwatchService.Infrastructure\StopwatchService.Infrastructure.csproj", "{4C1D0368-B2FA-421D-BEFC-D2BF8FF2E260}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,6 +50,10 @@ Global
 		{8C3E9548-1A70-4073-B16B-F3DA8733946A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C3E9548-1A70-4073-B16B-F3DA8733946A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C3E9548-1A70-4073-B16B-F3DA8733946A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C1D0368-B2FA-421D-BEFC-D2BF8FF2E260}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C1D0368-B2FA-421D-BEFC-D2BF8FF2E260}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C1D0368-B2FA-421D-BEFC-D2BF8FF2E260}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C1D0368-B2FA-421D-BEFC-D2BF8FF2E260}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

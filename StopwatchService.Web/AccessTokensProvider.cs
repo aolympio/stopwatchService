@@ -1,28 +1,30 @@
 ﻿using Microsoft.Owin.Security.OAuth;
 using StopwatchService.BusinessRules;
-using StopwatchService.Domain.Entities;
+using StopwatchService.Domain.Structs;
+using StopwatchService.Infrasctructure.Config;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace StopwatchService.Web
 {
     public class AccessTokensProvider : OAuthAuthorizationServerProvider
     {
+        private const string MustRegisterNewUsersKey = "MustRegisterNewUsers";
+        private UserWrapper UserWrapper;
+
         public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
             context.Validated();
         }
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
-        {
-            var isRegissteredUser = new UserBusiness().ValidateIfUserIsRegistered(context.UserName, context.Password);
-            
+        {            
+            bool mustRegisterNewUsersKey = bool.Parse(ConfigurationProvider.GetConfiguration(MustRegisterNewUsersKey));
+            var isRegisteredUser = new UserBusiness().ValidateIfUserIsRegistered(context.UserName, context.Password);
+
             //Canceling token creation if user is not found.
-            if (!isRegissteredUser)
+            if (!isRegisteredUser && !mustRegisterNewUsersKey)
             {
                 context.SetError("invalid_grant", "User Not Found.");
                 return;
@@ -31,6 +33,14 @@ namespace StopwatchService.Web
             //Create token with extra info if user exists.
             var userIdentity = new ClaimsIdentity(context.Options.AuthenticationType);
             context.Validated(userIdentity);
+
+            UserWrapper = new UserWrapper
+            {
+                Name = context.UserName,
+                Password = context.Password,
+                IsEnabled = true,
+                CreationDate = DateTime.Now
+            };            
         }
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)
@@ -42,5 +52,16 @@ namespace StopwatchService.Web
             }
             return base.TokenEndpoint(context);
         }
+
+        public override Task TokenEndpointResponse(OAuthTokenEndpointResponseContext context)
+        {
+            UserWrapper.Token = context.AccessToken;
+            DateTime expriresDate = DateTime.ParseExact(context.Properties.Dictionary[".expires"], "R", null);
+            UserWrapper.TokenExpirationDate = expriresDate;
+
+            new UserBusiness().InsertOrReplaceStopwatch(UserWrapper);
+
+            return base.TokenEndpointResponse(context);
+        }           
     }
 }

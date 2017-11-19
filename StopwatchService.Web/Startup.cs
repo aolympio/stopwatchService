@@ -2,6 +2,7 @@
 using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
+using StopwatchService.Infrasctructure.Config;
 using System;
 using System.Web.Http;
 
@@ -9,6 +10,8 @@ namespace StopwatchService.Web
 {
     public class Startup
     {
+        private const string TokenExpirationHoursKey = "TokenExpirationHours";
+
         public void Configuration(IAppBuilder app)
         {
             // Configuring WebApi
@@ -39,7 +42,8 @@ namespace StopwatchService.Web
             {
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/token"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromHours(2),
+                AccessTokenExpireTimeSpan =
+                    TimeSpan.FromHours(int.Parse(ConfigurationProvider.GetConfiguration(TokenExpirationHoursKey))),
                 Provider = new AccessTokensProvider()
             };
 

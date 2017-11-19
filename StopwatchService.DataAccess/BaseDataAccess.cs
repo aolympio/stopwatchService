@@ -1,5 +1,6 @@
 ﻿using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
+using StopwatchService.Infrasctructure.Config;
 
 namespace StopwatchService.DataAccess
 {
@@ -13,7 +14,7 @@ namespace StopwatchService.DataAccess
         public BaseDataAccess()
         {
             StorageConnectionString =
-                ConfigurationKeyProvider.GetConfiguration(StopwatchStorageConnectionStringKey);
+                ConfigurationProvider.GetConfiguration(StopwatchStorageConnectionStringKey);
 
             StorageAccount = CloudStorageAccount.Parse(StorageConnectionString);
 

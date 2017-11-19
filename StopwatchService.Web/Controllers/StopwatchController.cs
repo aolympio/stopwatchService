@@ -17,9 +17,9 @@ namespace StopwatchService.Controllers
         /// Create/Reset a stopwatchde pending on its status.
         /// POST: api/stopwatch
         /// </summary>
-        /// <param name="name">Stopwatch name to be created/reset.</param>
-        [HttpPost]
+        /// <param name="name">Stopwatch name to be created/reset.</param>       
         [Route("stopwatch")]
+        [HttpPost]
         public HttpResponseMessage Post([FromBody]string name)
         {
             var currentOwnerToken = Request.Headers.Authorization.Parameter;
