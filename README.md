@@ -1,6 +1,6 @@
 # STOPWATCH SERVICE
 
-This solution itends to invoke REST API methods in order to handle Stopwatch infos such as retrieving stopwatches by an atuthenticated user or create/reset stopwatches.
+This solution intends to invoke REST API methods in order to handle Stopwatch info such as retrieving stopwatches by an authenticated user or create/reset stopwatches.
 
 The stopwatch source code can be found in [GitHub]:
 - https://github.com/aolympio/stopwatchService
@@ -31,7 +31,7 @@ Those URIs are available into this solution and working ok in POSTMAN:
 	- http://stopwatchservice.azurewebsites.net/api/stopwatch 
 		- Header:
 			- Authorization = [token obtained at api/token]
-- GET /api/stopwatch/[stopwatch name] (Retrieves stopwatches you own whith the desired search name):
+- GET /api/stopwatch/[stopwatch name] (Retrieves stopwatches you own with the desired search name):
 	- http://stopwatchservice.azurewebsites.net/api/stopwatch 
 		- Header:
 			- Authorization = [token obtained at api/token]
@@ -39,7 +39,7 @@ Those URIs are available into this solution and working ok in POSTMAN:
 	- http://stopwatchservice.azurewebsites.net/api/stopwatch 
 		- Header:
 			- Authorization = [token obtained at api/token]
-		- Body (at POSTMAN, set rwa radio option)
+		- Body (at POSTMAN, set raw radio option)
 			- Enter stopwatch name value: "[stopwatch name value]"
 
 
@@ -58,7 +58,7 @@ Those URIs are available into this solution and working ok in POSTMAN:
 
 Usage of:
 - TDD(Unit and Integration) in order to enhance code coverage:
-	- When will be necessary perform unit tests whose would need to access DB, create a Mock whcih implements an interface IDataAccess and make BaseDataAccess implemetn this one also.
-	- This way, the tests won't be better without needness to access DB. 
-- Swagger in order to enhances the documetation and take approvement on the in o code and instructions.
-- Change the system to vastly use Async Calls in order to enhance peformance.
+	- When will be necessary perform unit tests whose would need to access DB, create a Mock which implements an interface IDataAccess and make BaseDataAccess implement this one also.
+	- This way, the tests won't be better without necessity to access DB. 
+- Swagger in order to enhances the documentation and take approvement on the in o code and instructions.
+- Change the system to vastly use Async Calls in order to enhance performance.
