@@ -9,8 +9,8 @@ namespace StopwatchService.Domain.Entities
 
         public User(string name, string token)
         {
-            this.PartitionKey = token;
-            this.RowKey = name;
+            this.PartitionKey = token; // User access token.
+            this.RowKey = name; // User name.
         }
 
         public string Password { get; set; }

@@ -4,6 +4,9 @@ using StopwatchService.Infrasctructure.Config;
 
 namespace StopwatchService.DataAccess
 {
+    /// <summary>
+    /// Responsible for provide most common features of Azure Table Storage.
+    /// </summary>
     public class BaseDataAccess
     {
         private readonly string StorageConnectionString;

@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace StopwatchService.Web
 {
+    /// <summary>
+    /// Responsible for meanwhile create tokens and users through rest URI.
+    /// </summary>
     public class AccessTokensProvider : OAuthAuthorizationServerProvider
     {
         private const string MustRegisterNewUsersKey = "MustRegisterNewUsers";
@@ -34,6 +37,8 @@ namespace StopwatchService.Web
             var userIdentity = new ClaimsIdentity(context.Options.AuthenticationType);
             context.Validated(userIdentity);
 
+            //Save user partial data which will me complete on Token Endpoin method
+            //beacause token info is missing.
             UserWrapper = new UserWrapper
             {
                 Name = context.UserName,
@@ -59,7 +64,15 @@ namespace StopwatchService.Web
             DateTime expriresDate = DateTime.ParseExact(context.Properties.Dictionary[".expires"], "R", null);
             UserWrapper.TokenExpirationDate = expriresDate;
 
-            new UserBusiness().InsertOrReplaceStopwatch(UserWrapper);
+            try
+            {
+                //Insert or replace current user.
+                new UserBusiness().InsertOrReplaceStopwatch(UserWrapper);
+            }
+            catch (Exception ex)
+            {            
+                throw new Exception(string.Format("Impossible to create/update user - {0}", ex));
+            }            
 
             return base.TokenEndpointResponse(context);
         }           

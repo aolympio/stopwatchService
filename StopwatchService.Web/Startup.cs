@@ -8,10 +8,17 @@ using System.Web.Http;
 
 namespace StopwatchService.Web
 {
+    /// <summary>
+    /// Responsible for initialize OWIN. Substitutes Global.asax.
+    /// </summary>
     public class Startup
     {
         private const string TokenExpirationHoursKey = "TokenExpirationHours";
 
+        /// <summary>
+        /// Main Configuration method.
+        /// </summary>
+        /// <param name="app">Stopwatch Web Api Application.</param>
         public void Configuration(IAppBuilder app)
         {
             // Configuring WebApi

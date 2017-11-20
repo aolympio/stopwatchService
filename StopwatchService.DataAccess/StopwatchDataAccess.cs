@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace StopwatchService.DataAccess
 {
+    /// <summary>
+    /// Responsible for perform DB operations related to Stopwatch..
+    /// </summary>
     public class StopwatchDataAccess : BaseDataAccess
     {
         private const string TableName = "Stopwatch";
@@ -19,6 +22,12 @@ namespace StopwatchService.DataAccess
         #region public methods
         #region POST method
 
+        /// <summary>
+        /// Inserts/replaces a stopwatch.
+        /// </summary>
+        /// <param name="name">Stopwatch name.</param>             
+        /// <param name="currentOwnerToken">Token form the stopwatch owner.</param>             
+        /// <returns>Stopwatch inserted/replaced.</return>
         public Stopwatch InsertOrReplaceStopwatch(string name, string userName)
         {
             var stopwatch =
@@ -41,6 +50,12 @@ namespace StopwatchService.DataAccess
         #endregion
 
         #region GET methods
+
+        /// <summary>
+        /// Gets the stopwatches from the current owner user.
+        /// </summary>
+        /// <param name="ownerUserName">Owner user name.</param>     
+        /// <returns>Stopwatches from the requesting user.</return>
         public ICollection<ResponseStopwatchWrapper> GetStopwatchesByOwner(string ownerUserName)
         {
             // Construct the query operation for all stopwatch entities where PartitionKey=[ownerUserName].
@@ -48,25 +63,15 @@ namespace StopwatchService.DataAccess
                 new TableQuery<Stopwatch>()
                     .Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, ownerUserName));
 
-            return BindResponseStopwatches(query); ;
-
-            //return new List<Stopwatch> {new Stopwatch()
-            //{
-            //    ID = 1,
-            //    Name = "Cron1",
-            //    Owner = "Olympio",
-            //    CreationDate = DateTime.Now,
-            //    ResetingDate = DateTime.Now
-            //}, new Stopwatch()
-            //{
-            //    ID = 2,
-            //    Name = "Cron2",
-            //    Owner = "Olympio",
-            //    CreationDate = DateTime.Now,
-            //    ResetingDate = DateTime.Now
-            //}};
+            return BindResponseStopwatches(query);
         }
 
+        /// <summary>
+        /// Gets the stopwatches from the current owner user based on stopwatch name.
+        /// </summary>
+        /// <param name="name">Stopwatch name.</param>   
+        /// <param name="ownerUserName">Owner user name.</param>     
+        /// <returns>Stopwatches from the requesting user filtered by stopwatch name.</return>
         public ICollection<ResponseStopwatchWrapper> GetStopwatchesByName(string name, string ownerUserName)
         {
             TableQuery<Stopwatch> query =
@@ -77,28 +82,13 @@ namespace StopwatchService.DataAccess
                         TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.Equal, name)));
 
             return BindResponseStopwatches(query);
-            //return new List<Stopwatch> {new Stopwatch()
-            //{
-            //    ID = 3,
-            //    Name = "Cron3",
-            //    Owner = "Olympio",
-            //    CreationDate = DateTime.Now,
-            //    LastActionDate = DateTime.Now
-            //}, new Stopwatch()
-            //{
-            //    ID = 4,
-            //    Name = "Cron4",
-            //    Owner = "Olympio",
-            //    CreationDate = DateTime.Now.Subtract(TimeSpan.FromDays(-5)),
-            //    LastActionDate = DateTime.Now
-            //}};
         }  
         #endregion
         #endregion
 
         #region private methods
         /// <summary>
-        /// Get Elapsed time in Seconds among Last Action Date versus current date time.
+        /// Gets Elapsed time in Seconds among Last Action Date versus current date time.
         /// </summary>
         /// <param name="lastActionDate">Last Action Date (May be creation or reset date).</param>
         /// <returns>Elapsed Time in Seconds.</returns>
@@ -107,7 +97,12 @@ namespace StopwatchService.DataAccess
             TimeSpan elapsedTime = DateTime.Now - lastActionDate;
             return (int)elapsedTime.TotalSeconds;
         } 
-
+       
+        /// <summary>
+        /// Binds Stopwatch objects in Response Stopwatch ones.
+        /// </summary>
+        /// <param name="resultQuery">Result of query came form DB.</param>
+        /// <returns>Response Stopwatches.</returns>
         private ICollection<ResponseStopwatchWrapper> BindResponseStopwatches(TableQuery<Stopwatch> resultQuery)
         {
             ICollection<ResponseStopwatchWrapper> responseStopwatches = new List<ResponseStopwatchWrapper>();

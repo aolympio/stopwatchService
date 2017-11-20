@@ -9,8 +9,8 @@ namespace StopwatchService.Domain.Entities
 
         public Stopwatch(string name, string owner)
         {
-            this.RowKey = name;
-            this.PartitionKey = owner;
+            this.RowKey = name; //Stopwatch name.
+            this.PartitionKey = owner; //Stopwatch owner user name.
         }
 
         public DateTime LastActionDate { get; set; }       

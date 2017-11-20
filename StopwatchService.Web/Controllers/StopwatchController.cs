@@ -1,5 +1,6 @@
 ﻿using StopwatchService.BusinessRules;
 using StopwatchService.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -13,10 +14,10 @@ namespace StopwatchService.Controllers
     {
         #region POST Controller
         /// <summary>
-        /// Create/Reset a stopwatch depending on its status:
-        /// - Alreday Created: Reset it.
-        /// - Not Created: Create it.
         /// POST: api/stopwatch
+        //  Create/Reset a stopwatch depending on its status:
+        /// - Alreday Created: Reset it.
+        /// - Not Created: Create it.        
         /// </summary>
         /// <param name="name">Stopwatch name to be created/reseted.</param>       
         [Route("stopwatch")]
@@ -28,11 +29,23 @@ namespace StopwatchService.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Bad Request due to name parameter is null.");
             }
 
+            //Retrieve Token necessary to get user name info.
             var currentOwnerToken = Request.Headers.Authorization.Parameter;
 
             var stopwatchBusiness = new StopwatchBusiness();
+            var stopwatchInProgress = new Stopwatch();
 
-            var stopwatchInProgress = stopwatchBusiness.InsertOrReplaceStopwatch(name, currentOwnerToken);
+            try
+            {
+                //Insert or replace current stopwatch.
+                stopwatchInProgress = stopwatchBusiness.InsertOrReplaceStopwatch(name, currentOwnerToken);
+            }
+            catch (Exception ex)
+            {                
+                return Request.CreateResponse(
+                    HttpStatusCode.BadRequest, 
+                    string.Format("Issues meanwhile creating/updating stopwatch {0} - {1}", name, ex));
+            }            
 
             return Request.CreateResponse(HttpStatusCode.Created, stopwatchInProgress);
         } 
@@ -40,17 +53,19 @@ namespace StopwatchService.Controllers
 
         #region GET Controllers
         /// <summary>
-        /// Get all stopwatches from the requesting user.
         /// GET: api/stopwatch
+        /// Get all stopwatches from the requesting user.        
         /// </summary>
         /// <returns>List of stopwatches containing its name and elapsed time.</returns>
         [Route("stopwatch")]
         public HttpResponseMessage Get()
         {
+            //Retrieve Token necessary to get user name info.
             var currentOwnerToken = Request.Headers.Authorization.Parameter;
 
             var stopwatchBusiness = new StopwatchBusiness();
 
+            //Get all stowatches from current user.
             ICollection<ResponseStopwatchWrapper> stopwatchesFromCurrentOwner =
                 stopwatchBusiness.GetStopwatchesByOwner(currentOwnerToken);
 
@@ -58,14 +73,15 @@ namespace StopwatchService.Controllers
         }
 
         /// <summary>
-        /// Get Stopwatches from the requesting user based on the desired name.
         /// GET: api/stopwatch/[stopwatch_name]
+        /// Get Stopwatches from the requesting user based on the desired stopwatch name.
         /// </summary>
         /// <param name="name">Stopwatch desired name.</param>
         /// <returns>List of stopwatches containing its name and elapsed time.</returns>
         [Route("stopwatch/{name}")]
         public HttpResponseMessage Get(string name)
         {
+            //Retrieve Token necessary to get user name info.
             var currentOwnerToken = Request.Headers.Authorization.Parameter;
 
             var stopwatchBusiness = new StopwatchBusiness();

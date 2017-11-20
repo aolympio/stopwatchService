@@ -1,5 +1,8 @@
 ﻿namespace StopwatchService.Domain.Entities
 {
+    /// <summary>
+    /// Responsible for receive only the stopwatch data that will be returned to the client.
+    /// </summary>
     public class ResponseStopwatchWrapper
     {
         public ResponseStopwatchWrapper(string name, int elapsedTime)
