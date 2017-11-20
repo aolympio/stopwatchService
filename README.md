@@ -1,4 +1,4 @@
-#Stopwatch service
+## STOPWATCH SERVICE
 
 This solution itends to invoke REST API methods in order to handle Stopwatch infos such as retrieving stopwatches by an atuthenticated user or create/reset stopwatches.
 The stopwatch source code can be found in [GitHub]: https://github.com/aolympio/stopwatchService
@@ -44,5 +44,3 @@ Usage of:
 	- This way, the tests won't be better without needness to access DB. 
 - Swagger in order to enhances the documetation and take approvement on the in o code and instructions.
 - Change the system to vastly use Async Calls in order to enhance peformance.
-
-
