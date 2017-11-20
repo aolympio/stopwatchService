@@ -1,10 +1,10 @@
-## STOPWATCH SERVICE
+# STOPWATCH SERVICE
 
 This solution itends to invoke REST API methods in order to handle Stopwatch infos such as retrieving stopwatches by an atuthenticated user or create/reset stopwatches.
 The stopwatch source code can be found in [GitHub]: https://github.com/aolympio/stopwatchService
 The deployed stopwatch service can be found in http://stopwatchservice.azurewebsites.net
 
-#API available URIs
+## API available URIs
 Those URIs are available into this solution:
 - POST /api/token (Creates the OAuth token for Accredited users):
 	- http://stopwatchservice.azurewebsites.net/api/token
@@ -36,7 +36,7 @@ The tecnologies used in this solution were:
 - [x] Store data in Azure Table Storage
 
 
-### Improvements
+## Improvements
 
 Usage of:
 - TDD(Unit and Integration) in order to enhance code coverage:
