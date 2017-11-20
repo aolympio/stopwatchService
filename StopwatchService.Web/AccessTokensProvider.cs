@@ -67,7 +67,7 @@ namespace StopwatchService.Web
             try
             {
                 //Insert or replace current user.
-                new UserBusiness().InsertOrReplaceStopwatch(UserWrapper);
+                new UserBusiness().InsertOrReplaceUser(UserWrapper);
             }
             catch (Exception ex)
             {            

@@ -26,7 +26,7 @@ namespace StopwatchService.DataAccess
         /// </summary>
         /// <param name="userWrapper">User package with user info came from Web layer.</param>             
         /// <returns>User inserted/replaced.</return>
-        public User InsertOrReplaceStopwatch(UserWrapper userWrapper)
+        public User InsertOrReplaceUser(UserWrapper userWrapper)
         {
             var user = ConvertUserWrapperToUserObject(userWrapper);
 
