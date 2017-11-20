@@ -17,6 +17,8 @@ namespace StopwatchService.DataAccess
         }
 
         #region public methods
+        #region POST method
+
         public Stopwatch InsertOrReplaceStopwatch(string name, string userName)
         {
             var stopwatch =
@@ -35,25 +37,18 @@ namespace StopwatchService.DataAccess
                 return updateEntity;
             }
             throw new Exception(string.Format("Stopwatch {0} could not be reseted.", name));
-        }
+        } 
+        #endregion
 
+        #region GET methods
         public ICollection<ResponseStopwatchWrapper> GetStopwatchesByOwner(string ownerUserName)
         {
-            ICollection<ResponseStopwatchWrapper> responseStopwatches = new List<ResponseStopwatchWrapper>();
-
             // Construct the query operation for all stopwatch entities where PartitionKey=[ownerUserName].
             TableQuery<Stopwatch> query =
                 new TableQuery<Stopwatch>()
                     .Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, ownerUserName));
 
-            foreach (var currentStopwatch in Table.ExecuteQuery(query))
-            {
-                responseStopwatches.Add(
-                    new ResponseStopwatchWrapper(
-                        currentStopwatch.RowKey, this.GetElapsedTime(currentStopwatch.LastActionDate)));
-            }
-
-            return responseStopwatches;
+            return BindResponseStopwatches(query); ;
 
             //return new List<Stopwatch> {new Stopwatch()
             //{
@@ -72,12 +67,16 @@ namespace StopwatchService.DataAccess
             //}};
         }
 
-
-
-        public ICollection<Stopwatch> GetStopwatchesByName(string name, string currentOwnerToken)
+        public ICollection<ResponseStopwatchWrapper> GetStopwatchesByName(string name, string ownerUserName)
         {
+            TableQuery<Stopwatch> query =
+                new TableQuery<Stopwatch>().Where(
+                    TableQuery.CombineFilters(
+                        TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, ownerUserName),
+                        TableOperators.And,
+                        TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.Equal, name)));
 
-            return null;
+            return BindResponseStopwatches(query);
             //return new List<Stopwatch> {new Stopwatch()
             //{
             //    ID = 3,
@@ -93,7 +92,8 @@ namespace StopwatchService.DataAccess
             //    CreationDate = DateTime.Now.Subtract(TimeSpan.FromDays(-5)),
             //    LastActionDate = DateTime.Now
             //}};
-        } 
+        }  
+        #endregion
         #endregion
 
         #region private methods
@@ -107,6 +107,21 @@ namespace StopwatchService.DataAccess
             TimeSpan elapsedTime = DateTime.Now - lastActionDate;
             return (int)elapsedTime.TotalSeconds;
         } 
+
+        private ICollection<ResponseStopwatchWrapper> BindResponseStopwatches(TableQuery<Stopwatch> resultQuery)
+        {
+            ICollection<ResponseStopwatchWrapper> responseStopwatches = new List<ResponseStopwatchWrapper>();
+
+            foreach (var currentStopwatch in Table.ExecuteQuery(resultQuery))
+            {
+                responseStopwatches.Add(
+                    new ResponseStopwatchWrapper(
+                        currentStopwatch.RowKey, 
+                        this.GetElapsedTime(TimeZoneInfo.ConvertTime(currentStopwatch.LastActionDate, TimeZoneInfo.Local))));
+            }
+
+            return responseStopwatches;
+        }
         #endregion
     }
 }

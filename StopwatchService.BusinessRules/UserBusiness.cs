@@ -26,6 +26,5 @@ namespace StopwatchService.BusinessRules
 
             return user;
         }
-
     }
 }

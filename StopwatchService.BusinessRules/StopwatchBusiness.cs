@@ -1,13 +1,11 @@
 ﻿using StopwatchService.DataAccess;
 using StopwatchService.Domain.Entities;
-using System;
 using System.Collections.Generic;
 
 namespace StopwatchService.BusinessRules
 {
     public class StopwatchBusiness
     {
-
         StopwatchDataAccess StopwatchDataAccess = new StopwatchDataAccess();
      
         public Stopwatch InsertOrReplaceStopwatch(string name, string currentOwnerToken)
@@ -20,15 +18,16 @@ namespace StopwatchService.BusinessRules
             return stopwatchInProgress;
         }
 
-        public ICollection<ResponseStopwatchWrapper> GetStopwatchesByOwner(string ownerToken)
+        public ICollection<ResponseStopwatchWrapper> GetStopwatchesByOwner(string currentOwnerToken)
         {
-            var responseStopwatches = new List<ResponseStopwatchWrapper>();
-            return StopwatchDataAccess.GetStopwatchesByOwner(ownerToken);
+            var userName = new UserDataAccess().GetUserNameByToken(currentOwnerToken);
+            return StopwatchDataAccess.GetStopwatchesByOwner(userName);
         }
 
-        public ICollection<Stopwatch> GetStopwatchesByName(string name, string ownerToken)
+        public ICollection<ResponseStopwatchWrapper> GetStopwatchesByName(string name, string currentOwnerToken)
         {
-            return StopwatchDataAccess.GetStopwatchesByName(name, ownerToken);
+            var userName = new UserDataAccess().GetUserNameByToken(currentOwnerToken);
+            return StopwatchDataAccess.GetStopwatchesByName(name, userName);
         }
     }
 }

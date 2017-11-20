@@ -2,7 +2,6 @@
 using StopwatchService.Domain.Entities;
 using StopwatchService.Domain.Structs;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace StopwatchService.DataAccess
@@ -65,7 +64,5 @@ namespace StopwatchService.DataAccess
 
             return !query.ToList().Count.Equals(0);
         }
-
-
     }
 }

@@ -19,7 +19,6 @@ namespace StopwatchService.DataAccess
             StorageAccount = CloudStorageAccount.Parse(StorageConnectionString);
 
             TableClient = StorageAccount.CreateCloudTableClient();
-
         }
 
         public CloudTable GetCloudTable(string tableName)

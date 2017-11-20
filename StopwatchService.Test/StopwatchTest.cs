@@ -7,6 +7,8 @@ namespace StopwatchService.Test
     [TestFixture]
     public class StopwatchTest
     {
+        //TODO: Recreate tests using mock approach in order to simulate DB connection
+        #region Commented tests
         //Stopwatch stopwatch;
 
         //[OneTimeSetUp]
@@ -43,6 +45,7 @@ namespace StopwatchService.Test
         //    //    "Stopwatch without Status reseted.");
         //    //Assert.IsTrue(stopwatch.InitializeDate > stopwatch.CreationDate,
         //    //    "Reseted Stopwatch with wrong Initialize Date.");
-        //}
+        //} 
+        #endregion
     }
 }

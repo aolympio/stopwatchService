@@ -13,8 +13,6 @@ namespace StopwatchService.Domain.Entities
             this.PartitionKey = owner;
         }
 
-        public DateTime CreationDate { get; set; }
-        public DateTime LastActionDate { get; set; }
-       
+        public DateTime LastActionDate { get; set; }       
     }
 }

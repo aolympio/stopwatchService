@@ -1,8 +1,6 @@
 ﻿using StopwatchService.BusinessRules;
 using StopwatchService.Domain.Entities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -12,16 +10,24 @@ namespace StopwatchService.Controllers
     [Authorize]
     [RoutePrefix("api")]
     public class StopwatchController : ApiController
-    {        
+    {
+        #region POST Controller
         /// <summary>
-        /// Create/Reset a stopwatchde pending on its status.
+        /// Create/Reset a stopwatch depending on its status:
+        /// - Alreday Created: Reset it.
+        /// - Not Created: Create it.
         /// POST: api/stopwatch
         /// </summary>
-        /// <param name="name">Stopwatch name to be created/reset.</param>       
+        /// <param name="name">Stopwatch name to be created/reseted.</param>       
         [Route("stopwatch")]
         [HttpPost]
         public HttpResponseMessage Post([FromBody]string name)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Bad Request due to name parameter is null.");
+            }
+
             var currentOwnerToken = Request.Headers.Authorization.Parameter;
 
             var stopwatchBusiness = new StopwatchBusiness();
@@ -29,8 +35,10 @@ namespace StopwatchService.Controllers
             var stopwatchInProgress = stopwatchBusiness.InsertOrReplaceStopwatch(name, currentOwnerToken);
 
             return Request.CreateResponse(HttpStatusCode.Created, stopwatchInProgress);
-        }
+        } 
+        #endregion
 
+        #region GET Controllers
         /// <summary>
         /// Get all stopwatches from the requesting user.
         /// GET: api/stopwatch
@@ -43,8 +51,8 @@ namespace StopwatchService.Controllers
 
             var stopwatchBusiness = new StopwatchBusiness();
 
-            ICollection<ResponseStopwatchWrapper> stopwatchesFromCurrentOwner = 
-                stopwatchBusiness.GetStopwatchesByOwner(currentOwnerToken);            
+            ICollection<ResponseStopwatchWrapper> stopwatchesFromCurrentOwner =
+                stopwatchBusiness.GetStopwatchesByOwner(currentOwnerToken);
 
             return Request.CreateResponse(HttpStatusCode.OK, stopwatchesFromCurrentOwner);
         }
@@ -62,12 +70,11 @@ namespace StopwatchService.Controllers
 
             var stopwatchBusiness = new StopwatchBusiness();
 
-            ICollection<Stopwatch> namedStopwatchesFromCurrentOwner =
+            ICollection<ResponseStopwatchWrapper> namedStopwatchesFromCurrentOwner =
                 stopwatchBusiness.GetStopwatchesByName(name, currentOwnerToken);
 
             return Request.CreateResponse(HttpStatusCode.OK, namedStopwatchesFromCurrentOwner);
-        }
-
-               
+        }    
+        #endregion
     }
 }
