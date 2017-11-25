@@ -17,6 +17,19 @@ The tecnologies used in this solution were:
 - Windows Azure Table Storage 
 - POSTMAN as client API testing
 
+## Nuget dependecies-packages to be installed
+
+- WindowsAzure.Storage
+- WindowsAzure.ConfigurationManager
+- Microsoft.Azure.KyVault.Core
+- Microsoft.Owin
+- Microsoft.AspNet.WebApi.Owin
+- Microsoft.Owin.Security.Oauth
+- Microsoft.Owin.Cors
+- Microsoft.Owin.Host.SystemWeb
+- Microsoft.AspNet.Cors -Version 5.0.0
+- Microsoft.AspNet.WebApi
+
 ## API available URIs
 Those URIs are available into this solution and working ok in POSTMAN:
 - POST /api/token (Creates the OAuth token for Accredited users):
